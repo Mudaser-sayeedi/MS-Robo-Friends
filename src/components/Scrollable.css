@@ -1,0 +1,12 @@
+.scroll{
+    height: 60vh;
+    overflow-y: auto;
+    margin: 15px 0;
+}
+
+
+@media screen and (max-width:600px) {
+    .scroll{
+        height: 68vh;
+    }
+}
