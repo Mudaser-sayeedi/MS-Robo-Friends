@@ -1,4 +1,4 @@
-import {Component } from 'react';
+import { useState } from 'react';
 import './App.css';
 import robots from '../robots';
 import Card from '../components/Card';
@@ -6,36 +6,30 @@ import Navigation from '../components/Navigation';
 import Scrollable from '../components/Scrollable';
 import ErrorCatch from '../components/Error';
 
-class App extends Component{
-  constructor() {
-    super();
-    this.state = {
-      robots: [],
-      search:''
-    };
-  }
+function App() {
+  
+  // react hooks
+  const [robotList, setRobots] = useState([]);
+  // const [search, setSearch] = useState('');
 
-  onSearch = (event) => {
+  const onSearch = (event) => {
     const filtered = robots.filter((robot) => {
       return robot.name.includes(event.target.value);
     });
-    this.setState({
-      robots: filtered,
-    });
+    setRobots(filtered);
   };
 
-  render() {
-    return (
-      <div>
-        <Navigation search={this.onSearch}></Navigation>
-        <Scrollable>
-          <ErrorCatch>
-            <Card robots={this.state.robots}></Card>
-          </ErrorCatch>
-        </Scrollable>
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <Navigation search={onSearch}></Navigation>
+      <Scrollable>
+        <ErrorCatch>
+          <Card robots={robotList}></Card>
+        </ErrorCatch>
+      </Scrollable>
+    </div>
+  );
 }
 
 export default App;
